@@ -4,7 +4,17 @@
 ## Stores the inverse of a matrix to the global environment
 
 makeCacheMatrix <- function(x = matrix()) {
-        cacheInverse <<- cacheSolve(x)
+        cacheInverse <- NULL
+        set <- function(y){
+                x <<- y
+                m <<- NULL
+        }
+        get <- function()x
+        setInverse <- function(Inverse) cacheInverse <<- Inverse
+        getInverse <- function() Inverse
+        list(set = set, get = get,
+             setInverse = setInverse,
+             getInverse = getInverse)
 
 }
 
@@ -12,5 +22,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Computes the inverse of the matrix
 
 cacheSolve <- function(x, ...) {
-        solve(x) 
+        cacheInverse <- x$getInverse
+        if(!is.null(cacheInverse)){
+                message("getting cached data")
+                return(cacheInverse)
+        }
+        data <- x$get()
+        cacheInverse <- solve(data,...)
+        x$setInverse(cacheInverse)
+        cacheInverse
         }
