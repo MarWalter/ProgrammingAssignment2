@@ -1,15 +1,16 @@
-## Put comments here that give an overall description of what your
-## functions do
+## These functions create a special object named "cacheInverse
+## which is a data variable stored in the global environment
 
-## Write a short comment describing this function
+## Stores the inverse of a matrix to the global environment
 
 makeCacheMatrix <- function(x = matrix()) {
+        cacheInverse <<- cacheSolve(x)
 
 }
 
 
-## Write a short comment describing this function
+## Computes the inverse of the matrix
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-}
+        solve(x) 
+        }
